@@ -1,0 +1,111 @@
+/*
+ * Sandbox-only styles. Not shipped with the library.
+ * Atelier worktable treatment.
+ */
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+::selection {
+  background: var(--color-acid);
+  color: var(--color-acid-fg);
+}
+
+/* Faint blueprint grid behind component preview surfaces */
+.grid-paper {
+  background-image:
+    linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: -1px -1px;
+}
+
+[data-theme='dark'] .grid-paper {
+  background-image:
+    linear-gradient(to right, oklch(0.27 0.025 270) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(0.27 0.025 270) 1px, transparent 1px);
+  opacity: 0.55;
+}
+
+.grid-paper-fade {
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    black 50%,
+    transparent 100%
+  );
+  mask-image: radial-gradient(ellipse at center, black 50%, transparent 100%);
+}
+
+/* Tiny mono caption used for "PREVIEW", "01", etc. */
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Tabular figures for numbered lists */
+.tabular {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Slow pulse for the studio status dot */
+@keyframes acid-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 var(--color-acid);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 0 6px transparent;
+    opacity: 0.7;
+  }
+}
+.acid-dot {
+  animation: acid-pulse 2.4s ease-in-out infinite;
+}
+
+/* Active sidebar accent rail */
+.sidebar-accent {
+  position: relative;
+}
+.sidebar-accent[data-active='true']::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  width: 3px;
+  height: 1rem;
+  background: var(--color-acid);
+  transform: translateY(-50%);
+  border-radius: 2px;
+}
+
+/* Subtle scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 8px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted-fg);
+}
+
+/* The acid period — used after titles */
+.acid-period {
+  color: var(--color-acid);
+}

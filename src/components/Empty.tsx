@@ -1,0 +1,107 @@
+import * as React from 'react'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '../lib/cn'
+
+export const Empty = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-slot="empty"
+    className={cn(
+      'flex min-w-0 flex-1 flex-col items-center justify-center gap-6 rounded-lg border-dashed p-6 text-center text-balance md:p-12',
+      className,
+    )}
+    {...props}
+  />
+))
+Empty.displayName = 'Empty'
+
+export const EmptyHeader = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-slot="empty-header"
+    className={cn('flex max-w-sm flex-col items-center gap-2 text-center', className)}
+    {...props}
+  />
+))
+EmptyHeader.displayName = 'EmptyHeader'
+
+const emptyMediaVariants = cva(
+  'flex shrink-0 items-center justify-center mb-2 [&_svg:not([class*=size-])]:size-6',
+  {
+    variants: {
+      variant: {
+        default: 'bg-transparent',
+        icon: 'bg-muted text-fg flex size-10 shrink-0 items-center justify-center rounded-lg [&_svg:not([class*=size-])]:size-6',
+      },
+    },
+    defaultVariants: { variant: 'default' },
+  },
+)
+
+export interface EmptyMediaProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof emptyMediaVariants> {}
+
+export const EmptyMedia = React.forwardRef<HTMLDivElement, EmptyMediaProps>(
+  ({ className, variant, ...props }, ref) => (
+    <div
+      ref={ref}
+      data-slot="empty-icon"
+      data-variant={variant}
+      className={cn(emptyMediaVariants({ variant }), className)}
+      {...props}
+    />
+  ),
+)
+EmptyMedia.displayName = 'EmptyMedia'
+
+export const EmptyTitle = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-slot="empty-title"
+    className={cn('text-lg font-medium tracking-tight', className)}
+    {...props}
+  />
+))
+EmptyTitle.displayName = 'EmptyTitle'
+
+export const EmptyDescription = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-slot="empty-description"
+    className={cn(
+      'text-muted-fg [&>a:hover]:text-primary text-sm/relaxed [&>a]:underline [&>a]:underline-offset-4',
+      className,
+    )}
+    {...props}
+  />
+))
+EmptyDescription.displayName = 'EmptyDescription'
+
+export const EmptyContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    data-slot="empty-content"
+    className={cn(
+      'flex w-full max-w-sm min-w-0 flex-col items-center gap-4 text-sm text-balance',
+      className,
+    )}
+    {...props}
+  />
+))
+EmptyContent.displayName = 'EmptyContent'

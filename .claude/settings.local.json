@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun install *)",
+      "Bash(bun run *)",
+      "Bash(bun add *)",
+      "WebFetch(domain:ui.shadcn.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(gh api *)",
+      "WebFetch(domain:api.github.com)",
+      "mcp__plugin_playwright_playwright__browser_resize",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_close",
+      "mcp__plugin_playwright_playwright__browser_console_messages",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot"
+    ]
+  }
+}

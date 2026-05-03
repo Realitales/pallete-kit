@@ -1,0 +1,90 @@
+/*
+ * Palette — house tokens
+ * Atelier theme: warm cream paper · indigo ink · acid-lime accent.
+ *
+ * Consumers override any --color-* / --radius-* / --font-* var
+ * at :root or any element scope to brand the system.
+ */
+
+@theme {
+  /* Surfaces — warm cream paper */
+  --color-bg: oklch(0.972 0.014 90);
+  --color-fg: oklch(0.22 0.04 270);
+
+  --color-card: oklch(0.985 0.01 90);
+  --color-card-fg: oklch(0.22 0.04 270);
+
+  --color-muted: oklch(0.93 0.014 88);
+  --color-muted-fg: oklch(0.45 0.025 270);
+
+  --color-border: oklch(0.85 0.018 88);
+  --color-input: oklch(0.85 0.018 88);
+  --color-ring: oklch(0.86 0.21 130);
+
+  /* Action — deep ink (legible, high-contrast) */
+  --color-primary: oklch(0.22 0.04 270);
+  --color-primary-fg: oklch(0.985 0.01 90);
+
+  --color-secondary: oklch(0.91 0.014 88);
+  --color-secondary-fg: oklch(0.22 0.04 270);
+
+  --color-accent: oklch(0.91 0.014 88);
+  --color-accent-fg: oklch(0.22 0.04 270);
+
+  --color-destructive: oklch(0.58 0.21 30);
+  --color-destructive-fg: oklch(0.985 0.01 90);
+
+  /* House accents — used by chrome, available to consumers */
+  --color-acid: oklch(0.86 0.21 130);
+  --color-acid-fg: oklch(0.22 0.04 270);
+  --color-ink: oklch(0.22 0.04 270);
+  --color-paper: oklch(0.972 0.014 90);
+
+  /* Sharper than shadcn default — more architectural */
+  --radius: 0.5rem;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+
+  /* Type stack */
+  --font-sans:
+    'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system, 'Segoe UI',
+    Roboto, sans-serif;
+  --font-mono:
+    'Azeret Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-display: 'Bricolage Grotesque', Georgia, serif;
+}
+
+/* Dark theme — toggled via [data-theme="dark"] */
+:where([data-theme='dark']) {
+  --color-bg: oklch(0.165 0.025 270);
+  --color-fg: oklch(0.96 0.01 90);
+
+  --color-card: oklch(0.21 0.028 270);
+  --color-card-fg: oklch(0.96 0.01 90);
+
+  --color-muted: oklch(0.255 0.028 270);
+  --color-muted-fg: oklch(0.7 0.018 90);
+
+  --color-border: oklch(0.32 0.025 270);
+  --color-input: oklch(0.32 0.025 270);
+  --color-ring: oklch(0.86 0.21 130);
+
+  --color-primary: oklch(0.96 0.01 90);
+  --color-primary-fg: oklch(0.165 0.025 270);
+
+  --color-secondary: oklch(0.255 0.028 270);
+  --color-secondary-fg: oklch(0.96 0.01 90);
+
+  --color-accent: oklch(0.255 0.028 270);
+  --color-accent-fg: oklch(0.96 0.01 90);
+
+  --color-destructive: oklch(0.66 0.205 30);
+  --color-destructive-fg: oklch(0.165 0.025 270);
+
+  --color-acid: oklch(0.86 0.21 130);
+  --color-acid-fg: oklch(0.165 0.025 270);
+  --color-ink: oklch(0.96 0.01 90);
+  --color-paper: oklch(0.165 0.025 270);
+}
