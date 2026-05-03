@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router'
+import { Providers } from './app/Providers'
 import { router } from './router'
 import '@lib/styles/index.css'
 import './sandbox.css'
@@ -10,6 +11,8 @@ if (!root) throw new Error('Missing #root element')
 
 ReactDOM.createRoot(root).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Providers>
+      <RouterProvider router={router} />
+    </Providers>
   </React.StrictMode>,
 )

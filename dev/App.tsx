@@ -182,13 +182,11 @@ import {
   TabsList,
   TabsTrigger,
   Textarea,
-  Toaster,
   Toggle,
   ToggleGroup,
   ToggleGroupItem,
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
   toast,
 } from '@lib'
@@ -241,23 +239,20 @@ export function App() {
   }, [page])
 
   return (
-    <TooltipProvider delayDuration={200}>
-      <div className="min-h-screen bg-bg text-fg">
-        <SiteHeader page={page} onPageChange={setPage} />
-        {page === 'builder' ? (
-          <Builder />
-        ) : (
-          <div className="mx-auto flex max-w-screen-2xl">
-            <SidebarNav page={page} activeId={activeId} />
-            <main className="min-w-0 flex-1 px-6 py-10 lg:px-12">
-              {page === 'components' ? <ComponentsPage /> : <FoundationsPage />}
-              <FooterNote />
-            </main>
-          </div>
-        )}
-        <Toaster />
-      </div>
-    </TooltipProvider>
+    <div className="min-h-screen bg-bg text-fg">
+      <SiteHeader page={page} onPageChange={setPage} />
+      {page === 'builder' ? (
+        <Builder />
+      ) : (
+        <div className="mx-auto flex max-w-screen-2xl">
+          <SidebarNav page={page} activeId={activeId} />
+          <main className="min-w-0 flex-1 px-6 py-10 lg:px-12">
+            {page === 'components' ? <ComponentsPage /> : <FoundationsPage />}
+            <FooterNote />
+          </main>
+        </div>
+      )}
+    </div>
   )
 }
 
