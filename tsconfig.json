@@ -16,7 +16,12 @@
     "verbatimModuleSyntax": true,
     "resolveJsonModule": true,
     "useDefineForClassFields": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@lib": ["src/index.ts"],
+      "@lib/*": ["src/*"]
+    }
   },
   "include": ["src", "dev", "vite.config.ts"]
 }
