@@ -297,7 +297,7 @@ function ComponentsPage() {
 // ─────────────────────────────────────────────────────────────────────────────
 // SIDEBAR
 
-function SidebarNav({ page, activeId }: { page: Page; activeId: string }) {
+export function SidebarNav({ page, activeId }: { page: Page; activeId: string }) {
   if (page === 'foundations') return <FoundationsSidebar activeId={activeId} />
   // Compute global numbering across all groups
   let counter = 0
