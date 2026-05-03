@@ -11,10 +11,12 @@
 **Spec:** `docs/superpowers/specs/2026-05-03-dev-studio-router-architecture-design.md`
 
 **Verification model:** No test infra exists (explicit YAGNI). Each task verifies via:
-- `npm run typecheck` — must pass with zero errors
-- `npm run dev` — smoke-test the affected page in the browser; check console for errors
+- `bun run typecheck` — must pass with zero errors
+- `bun dev` — smoke-test the affected page in the browser; check console for errors
 
 Run dev server in a separate terminal at the start; leave it running across tasks.
+
+**Package manager:** This project uses `bun` (see `bun.lock`). Never run `npm` commands — they create competing lockfiles and inconsistent installs.
 
 **Commit discipline:** every task ends with a commit. Use Conventional Commits: `refactor:`, `feat:`, `chore:`. Branch from `main` (or current working branch); single feature branch is fine for the whole plan.
 
@@ -110,13 +112,13 @@ This phase lands `react-router` and the `@lib` alias without changing studio beh
 - [ ] **Step 1: Install**
 
 ```bash
-npm install react-router@^7
+bun add react-router@^7
 ```
 
 - [ ] **Step 2: Verify version**
 
 ```bash
-npm list react-router
+bun pm ls react-router
 ```
 
 Expected: shows `react-router@7.x.x` (latest minor).
@@ -124,7 +126,7 @@ Expected: shows `react-router@7.x.x` (latest minor).
 - [ ] **Step 3: Commit**
 
 ```bash
-git add package.json package-lock.json
+git add package.json bun.lock
 git commit -m "chore: add react-router@^7"
 ```
 
@@ -182,7 +184,7 @@ export default defineConfig({
 In a separate terminal:
 
 ```bash
-npm run dev
+bun dev
 ```
 
 Expected: Vite starts, no errors. Open the URL it prints; studio loads as before.
@@ -224,7 +226,7 @@ If `tsconfig.build.json` extends `tsconfig.json`, the paths inherit. Verify by r
 - [ ] **Step 3: Verify typecheck passes**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Expected: zero errors.
@@ -280,11 +282,11 @@ The big import block ends at line 191 with `} from '../src'`. Change to `} from 
 - [ ] **Step 6: Verify typecheck + dev server**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 Expected: zero errors.
 
-Browser: refresh `npm run dev` URL. Studio still loads identically. Console clean.
+Browser: refresh `bun dev` URL. Studio still loads identically. Console clean.
 
 - [ ] **Step 7: Commit**
 
@@ -337,7 +339,7 @@ ReactDOM.createRoot(root).render(
 - [ ] **Step 3: Verify typecheck + browser smoke**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 Expected: zero errors.
 
@@ -398,7 +400,7 @@ import { useTheme } from './app/hooks/useTheme'
 - [ ] **Step 3: Verify typecheck + smoke**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: refresh. Theme toggle in header still works. No console errors.
@@ -454,7 +456,7 @@ export function SiteHeader({
 - [ ] **Step 3: Verify typecheck + smoke**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: refresh. Header renders identically. Tab clicks still navigate. Theme toggle still works.
@@ -550,7 +552,7 @@ export function DocsHero() {
 - [ ] **Step 4: Verify typecheck + smoke**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: refresh. Hero renders on components page. Footer renders. No regressions.
@@ -638,7 +640,7 @@ return (
 - [ ] **Step 4: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: refresh. Tooltips still work (hover any tooltip-using component). Toasts still appear. No double-mounted providers.
@@ -751,7 +753,7 @@ export function SidebarNav({ page, activeId }: { page: Page; activeId: string })
 - [ ] **Step 4: Verify typecheck**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 Expected: zero errors.
 
@@ -817,7 +819,7 @@ export function FoundationsPage() { ... }
 - [ ] **Step 3: Verify typecheck + smoke**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: refresh on `/`. Should redirect to `/components`. Click sidebar header tabs — URL changes to `/foundations` and `/builder`. Refresh on each — page persists. Browser back button works.
@@ -849,7 +851,7 @@ Line 226 (`type Page = 'components' | 'foundations' | 'builder'`). The Page type
 - [ ] **Step 3: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: refresh /components, /foundations, /builder. All three pages render. Sidebar still shows. The sidebar's active-item highlight may now be stale (it's wired off `activeId` derived from URL hash, which is empty after navigation) — that's expected; we fix it in Phase 6.
@@ -908,7 +910,7 @@ import { FoundationsPage } from './App'
 - [ ] **Step 4: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: /components renders identically.
@@ -968,7 +970,7 @@ Remove the now-unused `FoundationsPage` import from `./App`.
 - [ ] **Step 4: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: /foundations renders identically.
@@ -1042,7 +1044,7 @@ NOTE: FooterNote is still imported from App.tsx because it's used here. We'll fi
 - [ ] **Step 5: Verify + commit**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: /components renders identically.
@@ -1118,7 +1120,7 @@ import { BuilderPage } from './pages/builder/BuilderPage'
 - [ ] **Step 5: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: navigate to /builder. Drag-drop sandbox works as before.
@@ -1197,7 +1199,7 @@ import type { LegacyEntry as Entry } from '../../shared/types'
 - [ ] **Step 3: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 - [ ] **Step 4: Commit**
@@ -1306,7 +1308,7 @@ export const formGroup: LegacyGroup = {
 - [ ] **Step 4: Verify (do NOT delete originals from App.tsx yet)**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Both old and new copies of Ex_Button etc. coexist temporarily. App.tsx's REGISTRY still references the App.tsx-local Ex_* — that's fine.
@@ -1377,7 +1379,7 @@ export const displayGroup: LegacyGroup = {
 - [ ] **Step 4: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 - [ ] **Step 5: Commit**
@@ -1613,7 +1615,7 @@ The variable rename `groups as REGISTRY` keeps the inner code unchanged.
 - [ ] **Step 3: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: /components renders all 53 examples. The new registry is now driving the page.
@@ -1643,7 +1645,7 @@ Now that ComponentsPage uses the new registry, the App.tsx-local copies are dead
 - [ ] **Step 4: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: /components renders. There may be import warnings if anything still references App.tsx's deleted symbols — fix by importing from new locations.
@@ -1751,7 +1753,7 @@ export function ComponentEntry({ entry, num }: { entry: EntryMeta; num: string }
 - [ ] **Step 5: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: /components renders. Each example example should now appear as its own component in React DevTools (verify by inspecting one example with React DevTools).
@@ -1820,7 +1822,7 @@ The counter reset is needed so re-mounting `FoundationsPage` doesn't keep increm
 - [ ] **Step 3: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 - [ ] **Step 4: Commit**
@@ -1911,7 +1913,7 @@ export function FoundationsPage() {
 - [ ] **Step 6: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: /foundations renders all 7 sections in order. Section numbering (01, 02, ...) is correct.
@@ -1946,7 +1948,7 @@ export function FoundationsSidebar({ activeId }: { activeId: string }) {
 - [ ] **Step 3: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 - [ ] **Step 4: Commit**
@@ -2005,7 +2007,7 @@ import { DocsSidebar } from '../chrome/DocsSidebar'
 - [ ] **Step 4: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: /components and /foundations both render the correct sidebar.
@@ -2043,7 +2045,7 @@ git rm dev/App.tsx
 - [ ] **Step 3: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: full smoke — /, /components, /foundations, /builder all render. No regressions.
@@ -2075,7 +2077,7 @@ Change `import './sandbox.css'` → `import './studio.css'`.
 - [ ] **Step 3: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: refresh. Visual styling unchanged.
@@ -2141,7 +2143,7 @@ export function useHashSpy(selector: string) {
 - [ ] **Step 2: Verify typecheck**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 - [ ] **Step 3: Commit**
@@ -2184,7 +2186,7 @@ export function useHashScrollOnMount() {
 - [ ] **Step 2: Verify typecheck**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 - [ ] **Step 3: Commit**
@@ -2268,7 +2270,7 @@ export function DocsLayout() {
 - [ ] **Step 6: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser smoke:
@@ -2353,7 +2355,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 - [ ] **Step 3: Verify**
 
 ```bash
-npm run typecheck
+bun run typecheck
 ```
 
 Browser: refresh. Theme toggle in header still works. Toggle, refresh — theme persists (DOM dataset is the persistence layer; that's unchanged). Switch routes; theme stays.
@@ -2385,7 +2387,7 @@ Open the spec at `docs/superpowers/specs/2026-05-03-dev-studio-router-architectu
 2. router.tsx lists 3 routes; visiting /, /components, /foundations, /builder works; refresh preserves; back/forward works.
 3. /components#switch cold-loads with Switch section in view.
 4. Scrolling components page updates the URL hash; sidebar highlights match.
-5. Library bundle byte-equivalent: run `npm run build` and verify dist/ contents look identical to prior build (tree, file sizes). Spot-check no `react-router` string in `dist/palette.js`:
+5. Library bundle byte-equivalent: run `bun run build` and verify dist/ contents look identical to prior build (tree, file sizes). Spot-check no `react-router` string in `dist/palette.js`:
    ```bash
    grep -c react-router dist/palette.js
    ```
