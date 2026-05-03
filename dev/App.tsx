@@ -256,7 +256,7 @@ export function App() {
   )
 }
 
-function ComponentsPage() {
+export function ComponentsPage() {
   let counter = 0
   return (
     <>
@@ -1419,7 +1419,7 @@ const REGISTRY: Group[] = [
 // ─────────────────────────────────────────────────────────────────────────────
 // FOUNDATIONS PAGE
 
-function FoundationsPage() {
+export function FoundationsPage() {
   return (
     <>
       <FoundationsOverview />
