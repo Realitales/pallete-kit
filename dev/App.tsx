@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Builder } from './builder/Builder'
+import { useTheme } from './app/hooks/useTheme'
 import { motion } from 'framer-motion'
 import {
   BellIcon,
@@ -189,22 +190,6 @@ import {
   TooltipTrigger,
   toast,
 } from '@lib'
-
-// ─────────────────────────────────────────────────────────────────────────────
-// THEME
-
-type Theme = 'light' | 'dark'
-
-function useTheme(): [Theme, (t: Theme) => void] {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof document === 'undefined') return 'light'
-    return (document.documentElement.dataset.theme as Theme) || 'light'
-  })
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme
-  }, [theme])
-  return [theme, setTheme]
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // REGISTRY — drives both sidebar nav and the main content sections
