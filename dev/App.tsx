@@ -1,7 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
-import { Builder } from './builder/Builder'
-import { SiteHeader } from './app/chrome/SiteHeader'
-import { FooterNote } from './app/chrome/FooterNote'
+import { useMemo, useState } from 'react'
 import { DocsHero } from './app/chrome/DocsHero'
 import { motion } from 'framer-motion'
 import {
@@ -205,56 +202,7 @@ type Group = { label: string; entries: Entry[] }
 
 // Each renderer is defined below; we wire them up in the registry constant.
 
-// ─────────────────────────────────────────────────────────────────────────────
-// APP
-
 type Page = 'components' | 'foundations' | 'builder'
-
-export function App() {
-  const [page, setPage] = useState<Page>('components')
-  const [activeId, setActiveId] = useState<string>('button')
-
-  // Track which section is in view
-  useEffect(() => {
-    const selector =
-      page === 'components' ? '[data-component]' : '[data-foundation]'
-    const sections = document.querySelectorAll<HTMLElement>(selector)
-    const obs = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0]
-        if (visible) setActiveId(visible.target.id)
-      },
-      { rootMargin: '-80px 0px -65% 0px', threshold: 0 },
-    )
-    sections.forEach((s) => obs.observe(s))
-    return () => obs.disconnect()
-  }, [page])
-
-  // When switching pages, scroll to top + reset active id
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' })
-    setActiveId(page === 'components' ? 'button' : 'overview')
-  }, [page])
-
-  return (
-    <div className="min-h-screen bg-bg text-fg">
-      <SiteHeader page={page} onPageChange={setPage} />
-      {page === 'builder' ? (
-        <Builder />
-      ) : (
-        <div className="mx-auto flex max-w-screen-2xl">
-          <SidebarNav page={page} activeId={activeId} />
-          <main className="min-w-0 flex-1 px-6 py-10 lg:px-12">
-            {page === 'components' ? <ComponentsPage /> : <FoundationsPage />}
-            <FooterNote />
-          </main>
-        </div>
-      )}
-    </div>
-  )
-}
 
 export function ComponentsPage() {
   let counter = 0
