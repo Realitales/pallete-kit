@@ -15,6 +15,11 @@ export default defineConfig({
       rollupTypes: true,
     }),
   ],
+  resolve: {
+    alias: {
+      '@lib': resolve(__dirname, 'src'),
+    },
+  },
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
