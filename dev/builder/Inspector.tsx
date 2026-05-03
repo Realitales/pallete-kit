@@ -10,7 +10,7 @@ import {
   SelectValue,
   Switch,
   Textarea,
-} from '../../src'
+} from '@lib'
 import type { CanvasNode } from './store'
 import { BLOCKS, type Control } from './blocks'
 

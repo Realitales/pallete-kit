@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { App } from './App'
-import '../src/styles/index.css'
+import '@lib/styles/index.css'
 import './sandbox.css'
 
 const root = document.getElementById('root')

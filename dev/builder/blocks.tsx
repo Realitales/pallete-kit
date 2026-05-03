@@ -22,7 +22,7 @@ import {
   Separator,
   Switch,
   Textarea,
-} from '../../src'
+} from '@lib'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SCHEMA TYPES

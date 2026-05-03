@@ -1,6 +1,6 @@
 import { XIcon } from 'lucide-react'
 import type { CanvasNode, Viewport } from './store'
-import { Button } from '../../src'
+import { Button } from '@lib'
 import { DeviceFrame } from './DeviceFrame'
 import { PlacedNode } from './PlacedNode'
 import { ViewportToggle } from './ViewportToggle'

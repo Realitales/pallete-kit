@@ -188,7 +188,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
   toast,
-} from '../src'
+} from '@lib'
 
 // ─────────────────────────────────────────────────────────────────────────────
 // THEME
