@@ -13,7 +13,18 @@
       "import": "./dist/palette.js",
       "require": "./dist/palette.cjs"
     },
-    "./styles.css": "./src/styles/tokens.css"
+    "./styles.css": "./src/styles/tokens.css",
+    "./themes/ufitra.css": "./src/themes/ufitra/tokens.css",
+    "./themes/ufitra": {
+      "types": "./dist/themes/ufitra/index.d.ts",
+      "import": "./dist/palette.js",
+      "require": "./dist/palette.cjs"
+    },
+    "./themes": {
+      "types": "./dist/themes/index.d.ts",
+      "import": "./dist/palette.js",
+      "require": "./dist/palette.cjs"
+    }
   },
   "files": [
     "dist",

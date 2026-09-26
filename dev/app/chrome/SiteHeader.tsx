@@ -1,6 +1,8 @@
-import { MoonIcon, SunIcon } from 'lucide-react'
+import { ChevronDownIcon, MoonIcon, PaletteIcon, SunIcon } from 'lucide-react'
 import { Button } from '@lib'
 import { useTheme } from '../hooks/useTheme'
+import { useBrand } from '../hooks/useBrand'
+import { themes } from '@lib/themes/registry'
 
 type Page = 'components' | 'foundations' | 'builder'
 
@@ -12,6 +14,7 @@ export function SiteHeader({
   onPageChange: (p: Page) => void
 }) {
   const [theme, setTheme] = useTheme()
+  const [brand, setBrand] = useBrand()
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-bg/85 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-screen-2xl items-center justify-between px-6 lg:px-12">
@@ -53,6 +56,7 @@ export function SiteHeader({
           </nav>
         </div>
         <div className="flex items-center gap-3">
+          <BrandSwitcher brand={brand} onBrandChange={setBrand} />
           <div className="hidden items-center gap-2 sm:flex">
             <span className="acid-dot inline-block size-1.5 rounded-full bg-acid" />
             <span className="tag text-muted-fg">Studio · live</span>
@@ -68,6 +72,32 @@ export function SiteHeader({
         </div>
       </div>
     </header>
+  )
+}
+
+function BrandSwitcher({
+  brand,
+  onBrandChange,
+}: {
+  brand: string
+  onBrandChange: (id: string) => void
+}) {
+  return (
+    <div className="relative flex items-center gap-1.5">
+      <PaletteIcon className="text-muted-fg size-4" />
+      <select
+        value={brand}
+        onChange={(e) => onBrandChange(e.target.value)}
+        className="bg-transparent text-fg cursor-pointer appearance-none border-none pr-5 text-sm font-medium outline-none"
+      >
+        {Object.values(themes).map((t) => (
+          <option key={t.id} value={t.id}>
+            {t.name}
+          </option>
+        ))}
+      </select>
+      <ChevronDownIcon className="text-muted-fg pointer-events-none absolute right-0 size-3.5" />
+    </div>
   )
 }
 

@@ -4,6 +4,7 @@ import { RouterProvider } from 'react-router'
 import { Providers } from './app/Providers'
 import { router } from './router'
 import '@lib/styles/index.css'
+import '@lib/themes/ufitra/tokens.css'
 import './sandbox.css'
 
 const root = document.getElementById('root')
